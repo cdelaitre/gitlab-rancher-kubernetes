@@ -9,9 +9,10 @@ How to enable Auto DevOps GitLab CI/CD to a custom Rancher managed Kubernetes cl
 - GitLab : 11.9.6-ce
 - Rancher : 2.1.8
 
-##
-
+## Run autodevops.sh
 ```
+cdelaitre@ubuntu1 ~/workspace/gitlab-rancher-kubernetes (master) $ ./autodevops.sh
+
 #-----------------------
 kubectl check configuration
 #-----------------------
@@ -34,6 +35,10 @@ token:      eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2V
 #-----------------------
 clusterrolebinding.rbac.authorization.k8s.io/permissive-binding created
 ```
+
+## Notice
+
+I need to change the *API URL* to a cluster node end-point : https://192.168.56.102:6443
 
 ## References
 - Official GitLab documentation : https://docs.gitlab.com/ce/user/project/clusters/ 
