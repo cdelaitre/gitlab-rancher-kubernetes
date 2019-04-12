@@ -35,8 +35,16 @@ The purpose here is to provide a script to help people to configure the existing
 - VM2 cluster1 192.168.56.101 : Rancher server stable 2.1.8
 - VM3 cluster2 192.168.56.102 : Rancher agent worker1 node
 
-## Clone this repo and run autodevops.sh
+## Commands
 
+### Clone this repo, execute autodevops.sh
+```
+git clone https://github.com/cdelaitre/gitlab-rancher-kubernetes.git
+cd gitlab-rancher-kubernetes
+./autodevops.sh
+```
+
+### Example
 ```
 cdelaitre@ubuntu1 ~/workspace/gitlab-rancher-kubernetes (master) $ ./autodevops.sh
 
