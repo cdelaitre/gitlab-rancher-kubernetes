@@ -1,15 +1,42 @@
 # gitlab-rancher-kubernetes
 
-## Purpose
-How to enable Auto DevOps GitLab CI/CD to a custom Rancher managed Kubernetes cluster
+## Context
+In order to enable GitLab's AutoDevOps feature you need to fill the form "connecting GitLab with a Kubernetes cluster".
+As I write this, the official documentation focuses on GKE cluster solution, so we only consider here an existing cluster managed by Rancher (which is my case).
 
-## Tested versions
-- VM Ubuntu : 18.04
-- Docker : 18.06
-- GitLab : 11.9.6-ce
-- Rancher : 2.1.8
+The purpose here is to provide a script to help people to configure the existing cluster and fill the required GitLab fields marked by (\*) :
+- Kubernetes cluster name
+- Environment scope
+- API URL \*
+- CA Certificate \*
+- Token \*
+- Project namespace (optional, unique)
+- RBAC-enabled cluster
 
-## Run autodevops.sh
+## Features
+
+- validate kubectl configuration
+- display API URL
+- create namespace gitlab-managed-apps
+- create service account gitlab-sa
+- create role gitlab-role
+- create rolebinding gitlab-rb
+- displays CA Certificate from secret gitlab-sa-token-XXXX
+- displays token from secret gitlab-sa-token-XXXX
+- set role permissive-binding
+
+## Requirements
+- ssh terminal session
+- kubectl installed (snap recommended) and configured (~/.kube/config recommended)
+
+## Setup
+3 VM Ubuntu 18.04 with Docker 18.06 installed
+- VM1 ubuntu1 192.168.56.11 : GitLab 11.9.6-ce installed (omnibus docker-compose installation)
+- VM2 cluster1 192.168.56.101 : Rancher server stable 2.1.8
+- VM3 cluster2 192.168.56.102 : Rancher agent worker1 node
+
+## Clone this repo and run autodevops.sh
+
 ```
 cdelaitre@ubuntu1 ~/workspace/gitlab-rancher-kubernetes (master) $ ./autodevops.sh
 
@@ -38,7 +65,7 @@ clusterrolebinding.rbac.authorization.k8s.io/permissive-binding created
 
 ## Notice
 
-I need to change the *API URL* to a cluster node end-point : https://192.168.56.102:6443
+I need to change the *API URL* to the cluster agent worker1 node end-point : https://192.168.56.102:6443
 
 ## References
 - Official GitLab documentation : https://docs.gitlab.com/ce/user/project/clusters/ 
